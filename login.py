@@ -20,11 +20,11 @@ obj = SmartConnect(api_key=api_key)
 try:
     data = obj.generateSession(client_code, password, totp)
     refresh_token = data['data']['refreshToken']
-    print("✅ Login Successful!")
+    print(" Login Successful!")
     print("Client Code:", client_code)
     print("Feed Token:", obj.getfeedToken())
     print("Refresh Token:", refresh_token)
 
 except Exception as e:
-    print("❌ Login Failed!")
+    print("Login Failed!")
     print("Error:", e)
