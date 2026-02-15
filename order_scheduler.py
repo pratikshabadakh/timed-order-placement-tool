@@ -24,9 +24,9 @@ try:
     obj = SmartConnect(api_key=api_key)
     data = obj.generateSession(client_code, password, totp)
     refresh_token = data['data']['refreshToken']
-    print("✅ Login Successful!")
+    print("Login Successful!")
 except Exception as e:
-    print("❌ Login Failed:", e)
+    print("Login Failed:", e)
     exit()
 
 # -------------------------------
@@ -43,14 +43,14 @@ def log_order(symbol, qty, otype, status, order_id):
 # -------------------------------
 # Step 4: Take User Inputs
 # -------------------------------
-symbol = input("📦 Enter Trading Symbol (e.g., SBIN-EQ): ").strip()
-token = input("🔑 Enter Symbol Token: ").strip()
-side = input("📈 BUY or SELL?: ").upper()
-otype = input("💹 MARKET or LIMIT?: ").upper()
-qty = input("🔢 Quantity to buy/sell: ").strip()
-ptype = input("📂 Product Type (INTRADAY or DELIVERY): ").upper()
-repeat_count = int(input("🔁 Number of times to repeat order: ").strip())
-order_time = input("⏰ Enter time to place order (HH:MM 24h format): ").strip()
+symbol = input("Enter Trading Symbol (e.g., SBIN-EQ): ").strip()
+token = input("Enter Symbol Token: ").strip()
+side = input("BUY or SELL?: ").upper()
+otype = input("MARKET or LIMIT?: ").upper()
+qty = input("Quantity to buy/sell: ").strip()
+ptype = input("Product Type (INTRADAY or DELIVERY): ").upper()
+repeat_count = int(input("Number of times to repeat order: ").strip())
+order_time = input("Enter time to place order (HH:MM 24h format): ").strip()
 
 # -------------------------------
 # Step 5: Order Placement
@@ -73,9 +73,9 @@ def place_order():
         }
 
         response = obj.placeOrder(order_params)
-        print("📦 Full API Response:", response)
+        print("Full API Response:", response)
 
-        # ✅ Fix: If response is just a string (order ID), log it
+        # Fix: If response is just a string (order ID), log it
         if isinstance(response, str):
             order_id = response
         elif isinstance(response, dict) and "data" in response and "orderid" in response["data"]:
@@ -84,14 +84,14 @@ def place_order():
             order_id = "N/A"
 
         if order_id != "N/A":
-            print("🟢 Order Placed! ID:", order_id)
+            print("Order Placed! ID:", order_id)
             log_order(symbol, qty, side, "Success", order_id)
         else:
-            print("🔴 Order Rejected. No Order ID.")
+            print("Order Rejected. No Order ID.")
             log_order(symbol, qty, side, "Failed", "N/A")
 
     except Exception as e:
-        print("🔴 Order Failed:", e)
+        print("Order Failed:", e)
         log_order(symbol, qty, side, "Failed", "N/A")
 
 # -------------------------------
@@ -105,7 +105,7 @@ def schedule_order():
             place_order()
             count["executions"] += 1
         else:
-            print("✅ All repeated orders completed.")
+            print("All repeated orders completed.")
             return schedule.CancelJob
 
     schedule.every().day.at(order_time).do(limited_order)
