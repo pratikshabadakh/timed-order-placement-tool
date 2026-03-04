@@ -2,8 +2,7 @@
 
 ## Overview
 This tool allows automated placement of stock or options orders using Angel One SmartAPI at a *scheduled time* with optional repeat functionality.
-
----
+
 
 ## Features
 - Scheduled order placement (HH:MM format)
@@ -13,8 +12,7 @@ This tool allows automated placement of stock or options orders using Angel One 
 - Secure .env credential loading
 - CSV logging of all orders
 - Works with Angel One SmartAPI
-
----
+
 
 ## Setup Instructions
 
