@@ -17,4 +17,5 @@ This tool allows automated placement of stock or options orders using Angel One 
 ## Setup Instructions
 
 1. Clone or unzip the project folder.
+
 2. Create your .env file in the root folder:
